@@ -34,7 +34,6 @@ func (h *Handler) InitRoutes(port string) {
 				// Получение баланса
 				balance.GET("/", h.GetBalance)
 			}
-
 		}
 
 		quests := api.Group("/quests")
@@ -51,8 +50,8 @@ func (h *Handler) InitRoutes(port string) {
 			taskProgress.POST("/", h.TaskCompletion)
 		}
 	}
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	fmt.Println("Swagger docs: http://127.0.0.1:" + port + "/swagger/")
+	router.GET("api/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	fmt.Println("Swagger docs: http://127.0.0.1:" + port + "/api/swagger/")
 	err := router.Run(":" + port)
 	if err != nil {
 		log.Fatal(err)

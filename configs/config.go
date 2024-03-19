@@ -1,48 +1,60 @@
 package configs
 
 import (
-	"github.com/kelseyhightower/envconfig"
+	"fmt"
 	"os"
 )
 
 type Config struct {
-	AppPort   string `default:"8080"`
-	DBHost    string `default:"0.0.0.0"`
-	DBPort    string `default:"5432"`
-	DBUser    string `default:"root"`
-	DBPass    string `default:"root"`
-	DBName    string `default:"task_tracking_db"`
-	DBSSLMode string `default:"disable"`
+	AppPort   string
+	DBHost    string
+	DBPort    string
+	DBUser    string
+	DBPass    string
+	DBName    string
+	DBSSLMode string
 }
 
-func NewConfig() Config {
-	var s Config
-	err := envconfig.Process("", &s)
-	if err != nil {
-		return Config{}
+func GetConfig() (Config, error) {
+	AppPort := os.Getenv("APP_PORT")
+	if AppPort == "" {
+		return Config{}, fmt.Errorf("APP_PORT is not set")
+	}
+	DBHost := os.Getenv("DB_HOST")
+	if DBHost == "" {
+		return Config{}, fmt.Errorf("DB_HOST is not set")
+	}
+	DBPort := os.Getenv("DB_PORT")
+	if DBPort == "" {
+		return Config{}, fmt.Errorf("DB_PORT is not set")
+	}
+	DBUser := os.Getenv("DB_USER")
+	if DBUser == "" {
+		return Config{}, fmt.Errorf("DB_USER is not set")
+	}
+	DBPass := os.Getenv("DB_PASS")
+	if DBPass == "" {
+		return Config{}, fmt.Errorf("DB_PASS is not set")
+	}
+	DBName := os.Getenv("DB_NAME")
+	if DBName == "" {
+		return Config{}, fmt.Errorf("DB_NAME is not set")
+	}
+	DBSSLMode := os.Getenv("DB_SSL_MODE")
+	if DBSSLMode == "" {
+		return Config{}, fmt.Errorf("DB_SSL_MODE is not set")
 	}
 
-	if os.Getenv("APP_PORT") != "" {
-		s.AppPort = os.Getenv("APP_PORT")
-	}
-	if os.Getenv("DB_HOST") != "" {
-		s.DBHost = os.Getenv("DB_HOST")
-	}
-	if os.Getenv("DB_PORT") != "" {
-		s.DBPort = os.Getenv("DB_PORT")
-	}
-	if os.Getenv("DB_USER") != "" {
-		s.DBUser = os.Getenv("DB_USER")
-	}
-	if os.Getenv("DB_PASS") != "" {
-		s.DBPass = os.Getenv("DB_PASS")
-	}
-	if os.Getenv("DB_NAME") != "" {
-		s.DBName = os.Getenv("DB_NAME")
-	}
-	if os.Getenv("DB_SSL_MODE") != "" {
-		s.DBSSLMode = os.Getenv("DB_SSL_MODE")
+	cfg := Config{
+		AppPort:   AppPort,
+		DBHost:    DBHost,
+		DBPort:    DBPort,
+		DBUser:    DBUser,
+		DBPass:    DBPass,
+		DBName:    DBName,
+		DBSSLMode: DBSSLMode,
 	}
 
-	return s
+	return cfg, nil
+
 }

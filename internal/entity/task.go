@@ -20,7 +20,7 @@ type TaskInput struct {
 
 func (t *TaskInput) Validate() error {
 	if t.Name == "" {
-		return fmt.Errorf("Отсутствует название задания")
+		return fmt.Errorf("отсутствует название задания")
 	}
 	if len(t.Name) < 1 {
 		return fmt.Errorf("Название задания слишком короткое")

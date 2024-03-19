@@ -5,18 +5,18 @@ import (
 	"task_tracking_service/internal/entity"
 )
 
-// @Summary Создание пользователя
-// @Tags users
-// @Description Создание пользователя
-// @ID post-users
-// @Accept  json
-// @Produce  json
-// @Param input body entity.UserInput true "body"
-// @Success 200 {object} Response
-// @Failure 400,401,403,404 {object} Response
-// @Failure 500 {object} Response
-// @Failure default {object} Response
-// @Router /users/ [post]
+// @Summary		Создание пользователя
+// @Tags			users
+// @Description	Создание пользователя
+// @ID				post-users
+// @Accept			json
+// @Produce		json
+// @Param			input			body		entity.UserInput	true	"body"
+// @Success		200				{object}	Response
+// @Failure		400,401,403,404	{object}	Response
+// @Failure		500				{object}	Response
+// @Failure		default			{object}	Response
+// @Router			/users/ [post]
 func (h *Handler) CreateUser(ctx *gin.Context) {
 	var input entity.UserInput
 	// Получение тела запроса

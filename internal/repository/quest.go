@@ -53,8 +53,7 @@ func (r *QuestRepo) GetQuestsAndTasks() ([]entity.Quest, error) {
 	}
 	var questWithTasks []QuestWithTasks
 	// Получение всех квестов и их заданий
-	questsQuery := `SELECT q.id, q.name, q.cost, t.id, t.name, t.is_reusable, t.cost FROM quests q 
-		JOIN tasks t ON q.id = t.quest_id`
+	questsQuery := `SELECT q.id, q.name, q.cost, t.id, t.name, t.is_reusable, t.cost FROM quests q JOIN tasks t ON q.id = t.quest_id`
 	rows, err := r.db.Query(questsQuery)
 	if err != nil {
 		return nil, err

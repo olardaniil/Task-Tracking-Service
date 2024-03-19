@@ -5,21 +5,21 @@ services:
     build: ./
     restart: always
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
-      - db_postgres
+      - task_tracking_db_postgres
     environment:
-      - APP_PORT=8080
-      - DB_HOST=task_tracking_db
-      - DB_PORT=5432
+      - APP_PORT=8081
+      - DB_HOST=task_tracking_db_postgres
+      - DB_PORT=5433
       - DB_USER=root
       - DB_PASS=root
       - DB_NAME=task_tracking_db
       - DB_SSL_MODE=disable
 
-  db_postgres:
+  task_tracking_db_postgres:
     image: postgres
-    container_name: task_tracking_db
+    container_name: task_tracking_db_postgres
     restart: always
 
     shm_size: 256mb
@@ -30,4 +30,4 @@ services:
       POSTGRES_DB: task_tracking_db
 
     ports:
-      - "5432:5432"
+      - "5433:5432"

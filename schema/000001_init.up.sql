@@ -2,13 +2,13 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(20) UNIQUE CHECK (username <> ''),
-    balance INTEGER DEFAULT 0 CHECK ( balance >= 0 )
+    balance INTEGER DEFAULT 0 CHECK (balance >= 0)
 );
 
 CREATE TABLE quests (
     id SERIAL PRIMARY KEY,
     name VARCHAR(150),
-    cost INTEGER DEFAULT 0 CHECK ( cost >= 0 )
+    cost INTEGER DEFAULT 0 CHECK (cost >= 0)
 );
 
 CREATE TABLE quests_progress (

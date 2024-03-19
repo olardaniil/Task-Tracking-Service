@@ -9,6 +9,7 @@ type User interface {
 	CreateUser(user *entity.UserInput) (int, error)
 	GetBalanceAndHistoryTasks(userID int) (int, []entity.Task, error)
 }
+
 type Quest interface {
 	CreateQuest(quest *entity.QuestInput) (int, error)
 	GetQuestsAndTasks() ([]entity.Quest, error)

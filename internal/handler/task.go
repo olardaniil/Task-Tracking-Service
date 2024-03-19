@@ -5,18 +5,18 @@ import (
 	"task_tracking_service/internal/entity"
 )
 
-// @Summary Завершение задачи
-// @Tags tasks
-// @Description Завершение задачи. Задача может быть выполнена несколько раз - зависит от параметра is_reusable.
-// @ID post-tasks-progress
-// @Accept  json
-// @Produce  json
-// @Param input body entity.TaskProgress true "body"
-// @Success 200 {object} Response
-// @Failure 400,401,403,404 {object} Response
-// @Failure 500 {object} Response
-// @Failure default {object} Response
-// @Router /task-progress/ [post]
+// @Summary		Завершение задачи
+// @Tags			tasks
+// @Description	Завершение задачи. Задача может быть выполнена несколько раз - зависит от параметра is_reusable.
+// @ID				post-tasks-progress
+// @Accept			json
+// @Produce		json
+// @Param			input			body		entity.TaskProgress	true	"body"
+// @Success		200				{object}	Response
+// @Failure		400,401,403,404	{object}	Response
+// @Failure		500				{object}	Response
+// @Failure		default			{object}	Response
+// @Router			/task-progress/ [post]
 func (h *Handler) TaskCompletion(ctx *gin.Context) {
 	var input entity.TaskProgress
 	// Получение тела запроса

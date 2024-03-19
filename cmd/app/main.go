@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"task_tracking_service/configs"
 	"task_tracking_service/internal/handler"
@@ -8,25 +9,34 @@ import (
 	"task_tracking_service/internal/service"
 )
 
-// @title Task-Tracking-Service
-// @version 1.0
-// @description API Server for Task-Tracking-Service
+//	@title		Task-Tracking-Service
+//	@version	1.0
 
-// @host t-app.ru
-// @BasePath /api
+//	@BasePath	/api
 
 func main() {
-	db, err := repository.NewPostgresDB(configs.NewConfig())
+	cfg, err := configs.GetConfig()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	db, err := repository.NewPostgresDB(cfg)
 	if err != nil {
 		log.Fatalf("Ошибка при инициализации БД: %s", err.Error())
 	}
+
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
-	handlers.InitRoutes(configs.NewConfig().AppPort)
+	handlers.InitRoutes(cfg.AppPort)
 }
 
 func init() {
 	log.SetFlags(log.Ldate | log.Ltime | log.LUTC | log.Lshortfile)
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
