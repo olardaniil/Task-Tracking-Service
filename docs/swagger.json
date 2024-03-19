@@ -1,12 +1,12 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "API Server for Task-Tracking-Service",
+        "description": "API Server for FilmLibraryService",
         "title": "Task-Tracking-Service",
         "contact": {},
         "version": "1.0"
     },
-    "host": "t-app.ru",
+    "host": "127.0.0.1:8080",
     "basePath": "/api",
     "paths": {
         "/quests/": {

@@ -10,9 +10,9 @@ import (
 
 // @title Task-Tracking-Service
 // @version 1.0
-// @description API Server for Task-Tracking-Service
+// @description API Server for FilmLibraryService
 
-// @host t-app.ru
+// @host 127.0.0.1:8080
 // @BasePath /api
 
 func main() {

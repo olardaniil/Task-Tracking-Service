@@ -38,10 +38,10 @@ definitions:
       message:
         type: string
     type: object
-host: t-app.ru
+host: 127.0.0.1:8080
 info:
   contact: {}
-  description: API Server for Task-Tracking-Service
+  description: API Server for FilmLibraryService
   title: Task-Tracking-Service
   version: "1.0"
 paths:

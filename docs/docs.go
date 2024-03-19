@@ -422,11 +422,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "t-app.ru",
+	Host:             "127.0.0.1:8080",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "Task-Tracking-Service",
-	Description:      "API Server for Task-Tracking-Service",
+	Description:      "API Server for FilmLibraryService",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
