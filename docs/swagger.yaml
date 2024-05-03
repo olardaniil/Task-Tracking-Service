@@ -1,0 +1,275 @@
+basePath: /api
+definitions:
+  entity.QuestInput:
+    properties:
+      cost:
+        type: integer
+      name:
+        type: string
+      tasks:
+        items:
+          $ref: '#/definitions/entity.TaskInput'
+        type: array
+    type: object
+  entity.TaskInput:
+    properties:
+      cost:
+        type: integer
+      is_reusable:
+        type: boolean
+      name:
+        type: string
+    type: object
+  entity.TaskProgress:
+    properties:
+      task_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  entity.UserInput:
+    properties:
+      username:
+        type: string
+    type: object
+  handler.Response:
+    properties:
+      details: {}
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Task-Tracking-Service
+  version: "1.0"
+paths:
+  /quests/:
+    get:
+      consumes:
+      - application/json
+      description: Получить квесты
+      operationId: get-quests
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.Response'
+      summary: Получить квесты
+      tags:
+      - quests
+    post:
+      consumes:
+      - application/json
+      description: Создание квеста. В квесте может быть несколько задач. Каждая задача
+        может быть выполнена один или несколько раз в квесте - зависит от параметра
+        is_reusable.
+      operationId: post-quests
+      parameters:
+      - description: body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entity.QuestInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.Response'
+      summary: Создание квеста
+      tags:
+      - quests
+  /task-progress/:
+    post:
+      consumes:
+      - application/json
+      description: Завершение задачи. Задача может быть выполнена несколько раз -
+        зависит от параметра is_reusable.
+      operationId: post-tasks-progress
+      parameters:
+      - description: body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entity.TaskProgress'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.Response'
+      summary: Завершение задачи
+      tags:
+      - tasks
+  /users/:
+    post:
+      consumes:
+      - application/json
+      description: Создание пользователя
+      operationId: post-users
+      parameters:
+      - description: body
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.Response'
+      summary: Создание пользователя
+      tags:
+      - users
+  /users/{user_id}/balance:
+    get:
+      consumes:
+      - application/json
+      description: Получить баланс пользователя
+      operationId: get-users-id-balance
+      parameters:
+      - description: user_id
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.Response'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.Response'
+      summary: Получить баланс пользователя
+      tags:
+      - users
+swagger: "2.0"
