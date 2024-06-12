@@ -18,7 +18,8 @@ type Config struct {
 func GetConfig() (Config, error) {
 	AppPort := os.Getenv("APP_PORT")
 	if AppPort == "" {
-		return Config{}, fmt.Errorf("APP_PORT is not set")
+		AppPort = "8080"
+		fmt.Println("APP_PORT is not set. Using default port: 8080")
 	}
 	DBHost := os.Getenv("DB_HOST")
 	if DBHost == "" {
